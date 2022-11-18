@@ -5,8 +5,10 @@ import ExpensesFilter from './ExpensesFilter';
 import {useState} from 'react';
 
 function Expenses(props) {
-	const data = props.data;
 	const [filterYear, setFilterYear] = useState('2020');
+	const data = props.data.filter((expense) => {
+		return expense.date.getFullYear().toString() === filterYear;
+	});
 	const submitFilterYearHandler = (submitFilterYear) => {
 		setFilterYear(submitFilterYear);
 	};
