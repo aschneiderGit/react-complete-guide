@@ -1,5 +1,4 @@
 import './Expenses.css';
-import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
 import ExpensesFilter from './ExpensesFilter';
 import {useState} from 'react';
@@ -15,13 +14,15 @@ function Expenses(props) {
 	};
 
 	return (
-		<Card className="expenses">
-			<ExpensesFilter
-				selected={filterYear}
-				onSubmitFilterYear={submitFilterYearHandler}
-			/>
-			<ExpenseList filterExpenses={filterExpenses} />
-		</Card>
+		<li>
+			<Card className="expenses">
+				<ExpensesFilter
+					selected={filterYear}
+					onSubmitFilterYear={submitFilterYearHandler}
+				/>
+				<ExpenseList filterExpenses={filterExpenses} />
+			</Card>
+		</li>
 	);
 }
 
