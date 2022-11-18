@@ -6,30 +6,33 @@ import {useState} from 'react';
 
 function Expenses(props) {
 	const [filterYear, setFilterYear] = useState('2020');
-	const data = props.data.filter((expense) => {
+	const filterExpenses = props.expenses.filter((expense) => {
 		return expense.date.getFullYear().toString() === filterYear;
 	});
 	const submitFilterYearHandler = (submitFilterYear) => {
 		setFilterYear(submitFilterYear);
 	};
 
+	let expensesContent = <p> No Expenses found</p>;
+
+	if (filterExpenses.length > 0) {
+		expensesContent = filterExpenses.map((expense) => (
+			<ExpenseItem
+				key={expense.id}
+				date={expense.date}
+				amount={expense.amount}
+				title={expense.title}
+			/>
+		));
+	}
 	return (
-		<div>
+		<Card className="expenses">
 			<ExpensesFilter
 				selected={filterYear}
 				onSubmitFilterYear={submitFilterYearHandler}
 			/>
-			<Card className="expenses">
-				{data.map((expense) => (
-					<ExpenseItem
-						key={expense.id}
-						date={expense.date}
-						amount={expense.amount}
-						title={expense.title}
-					/>
-				))}
-			</Card>
-		</div>
+			{expensesContent}
+		</Card>
 	);
 }
 
